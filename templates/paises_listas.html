@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>LISTA DE PAISES</title>
+</head>
+<body>
+    {% if user %}
+    <h1>Bienvenido de vuelta, {{ user }}</h1>
+    {% else %}
+    <h1>Hola invitado</h1>
+    {% endif %}
+    <h2>Listado de paises de la region</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre Continente</th>
+                <th>Paises Continente</th>
+                <th>Capital Continente</th>
+                <th>Moneda Continente</th>
+                <th>Población Continente</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                {% for continente in continentes %}
+                <tr>
+                        {%  if  continente.Nombre == "América" %}
+                            <td rowspan="{{ america }}" >
+                        {%  elif  continente.Nombre == "Europa" %}
+                            <td rowspan="{{ europa }}" >
+                        {%  elif  continente.Nombre == "ASIA" %}    
+                            <td rowspan="{{ asia }}" >
+                        {%  endif %}  
+                            {{  continente.Nombre  }}          
+                            </td>
+                            {% for pais in continente.Paises  %}
+                                <td>  {{ pais.Nombre }}  </td>
+                                <td>  {{ pais.Capital }}  </td>
+                                <td>  {{ pais.Moneda }}  </td>
+                                <td>  {{ pais.Poblacion }}  </td>
+                            </tr> 
+                            {% endfor %}
+                {% endfor %}               
+                </tr>            
+                         
+            </tbody>                    
+        </table>
+</body>
+</html>
